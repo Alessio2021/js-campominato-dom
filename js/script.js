@@ -5,8 +5,7 @@
 const select = document.getElementById('select');
 const grid = document.getElementById('grid');
 const play = document.querySelector('.play');
-const bombs = [];
-
+let points = 0;
 
 play.addEventListener('click', function(){
     let selectValue = select.value;
@@ -15,48 +14,143 @@ play.addEventListener('click', function(){
     switch (selectValue){
     case 'facile':
     default:
+        bombs = createBombs(16, 1, 100);
+        console.log(bombs);
+
         for (let i = 1; i < 100 + 1; i++) {
-            const div = document.createElement('div')
+            // creo quadrato
+            const div = document.createElement('div');
             div.classList.add('square');
             div.innerHTML = i;
             grid.append(div);
-            div.addEventListener('click', function () {
-            div.classList.add('clicked');
-            });
+
+            const bombsClass = document.querySelectorAll('.bombs');
+            const isClicked = div.classList.contains('clicked');
+            
+            if (isClicked == false) {
+                div.addEventListener('click', function () {
+                    const numSquare = parseInt(this.innerText);
+                    div.classList.add('clicked');
+
+                    if (bombs.includes(numSquare)) {
+                        div.classList.add('bombs');
+                        alert('Il tuo punteggio è di' + ' ' + points);
+                        const divs = document.querySelectorAll('.square')
+
+                        for (let index = 0; index < divs.length; index++) {
+                            const numDom = parseInt(divs[index].innerText);
+                            console.log(numDom);
+
+                            if (bombs.includes(numDom)) {
+                                divs[index].classList.add('bombs');
+                            }
+                        }
+
+                    } else {
+                        points++
+                        console.log(points);
+                        console.log(isClicked);
+
+                        if (points == 84) {
+                            alert('HAI VINTO!')
+                        }
+                    }
+                });
+            }
         }
-
-        console.log(createBombs(16, 1, 100));
-
         break;
-        
+
     case 'medio':
+        bombs = createBombs(16, 1, 81);
+        console.log(bombs);
+
         for (let i = 1; i < 81 + 1; i++) {
-            const div = document.createElement('div')
+            // creo quadrato
+            const div = document.createElement('div');
             div.classList.add('square', 'medium');
             div.innerHTML = i;
             grid.append(div);
-            div.addEventListener('click', function () {
-            div.classList.add('clicked');
-            });
+
+            const bombsClass = document.querySelectorAll('.bombs');
+            const isClicked = div.classList.contains('clicked');
+
+            if (isClicked == false) {
+                div.addEventListener('click', function () {
+                    const numSquare = parseInt(this.innerText);
+                    div.classList.add('clicked');
+
+                    if (bombs.includes(numSquare)) {
+                        div.classList.add('bombs');
+                        alert('Il tuo punteggio è di' + ' ' + points);
+                        const divs = document.querySelectorAll('.square')
+
+                        for (let index = 0; index < divs.length; index++) {
+                            const numDom = parseInt(divs[index].innerText);
+                            console.log(numDom);
+
+                            if (bombs.includes(numDom)) {
+                                divs[index].classList.add('bombs');
+                            }
+                        }
+
+                    } else {
+                        points++
+                        console.log(points);
+                        console.log(isClicked);
+
+                        if (points == 64) {
+                            alert('HAI VINTO!')
+                        }
+                    }
+                });
+            }
         }
-
-        console.log(createBombs(16, 1, 81));
-
         break;
 
     case 'difficile':
+        bombs = createBombs(16, 1, 49);
+        console.log(bombs);
+
         for (let i = 1; i < 49 + 1; i++) {
             const div = document.createElement('div')
             div.classList.add('square', 'hard');
             div.innerHTML = i;
             grid.append(div);
-            div.addEventListener('click', function () {
-                div.classList.add('clicked');
-            });
+            const bombsClass = document.querySelectorAll('.bombs');
+            const isClicked = div.classList.contains('clicked');
+
+            if (isClicked == false) {
+                div.addEventListener('click', function () {
+                    const numSquare = parseInt(this.innerText);
+                    div.classList.add('clicked');
+
+                    if (bombs.includes(numSquare)) {
+                        div.classList.add('bombs');
+                        alert('Il tuo punteggio è di' + ' ' + points);
+                        const divs = document.querySelectorAll('.square')
+
+                        for (let index = 0; index < divs.length; index++) {
+                            const numDom = parseInt(divs[index].innerText);
+                            console.log(numDom);
+
+                            if (bombs.includes(numDom)) {
+                                divs[index].classList.add('bombs');
+                            }
+                        }
+
+                    } else {
+                        points++
+                        console.log(points);
+                        console.log(isClicked);
+
+                        if (points == 33) {
+                            alert('HAI VINTO!')
+                        }
+                    }
+                });
+            }
+
         }
-
-        console.log(createBombs(16, 1, 49));
-
         break;
     }
     
